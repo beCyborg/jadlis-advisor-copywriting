@@ -1,6 +1,6 @@
 # Changelog — advisors
 
-## [Unreleased]
+## [1.0.1] — 2026-09-07 — effort high и Opus на anchor-check / effort high and Opus on anchor-check
 
 ### Для человека
 
@@ -9,6 +9,7 @@
 ### For agents
 
 - Changed: `effort: high` вместо `xhigh` в `agents/advisor-opus-xhigh.md` и во frontmatter пяти советов (`adv-copy`, `adv-Decision`, `adv-influence`, `adv-product`, `adv-sales`); основание — ресёрч 06.09.2026 «Effort для плана и кода»: выше `high` растут токены, а не качество. Имя агента оставлено прежним — на него ссылаются 7 workflow.
+- Changed: `workflows/sales-council.js` — шаг `anchor-check` переведён с Haiku на Opus (`model: 'opus'`, `effort: 'low'`): шаг механический, Haiku/Sonnet в этом контуре не используются.
 - Changed: агент переименован `advisor-opus-xhigh` → `advisor-opus` — effort в имени врал после перевода на `high`, а меняется он чаще модели. Обновлены `agentType` в семи воркфлоу, ссылки в `adv-influence` и `adv-product`, карта файлов в `CLAUDE.md`.
 - Migration: **breaking** — переопределения `workerOpts` со старым `advisors:advisor-opus-xhigh` больше не резолвятся; заменить на `advisors:advisor-opus`.
 

@@ -1,13 +1,24 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "advisors",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "advisors — советы директоров",
   "description": "Восемь советов директоров на книжных линзах: параллельный разбор запроса, перекрёстная проверка claims скептиками, единый вердикт файлом. Решения, продукт, медийность, продажи, тексты, когнитивные искажения, стратегия власти, диагностика проектов.",
-  "author": { "name": "Be Cyborg" },
+  "author": {
+    "name": "Be Cyborg"
+  },
   "homepage": "https://github.com/beCyborg/advisors",
   "repository": "https://github.com/beCyborg/advisors",
-  "keywords": ["council", "advisors", "decision-making", "product", "marketing", "sales", "copywriting", "cognitive-biases"],
+  "keywords": [
+    "council",
+    "advisors",
+    "decision-making",
+    "product",
+    "marketing",
+    "sales",
+    "copywriting",
+    "cognitive-biases"
+  ],
   "userConfig": {
     "ADVISORS_MEMORY_DIR": {
       "type": "directory",
