@@ -9,6 +9,8 @@
 ### For agents
 
 - Changed: `effort: high` вместо `xhigh` в `agents/advisor-opus-xhigh.md` и во frontmatter пяти советов (`adv-copy`, `adv-Decision`, `adv-influence`, `adv-product`, `adv-sales`); основание — ресёрч 06.09.2026 «Effort для плана и кода»: выше `high` растут токены, а не качество. Имя агента оставлено прежним — на него ссылаются 7 workflow.
+- Changed: агент переименован `advisor-opus-xhigh` → `advisor-opus` — effort в имени врал после перевода на `high`, а меняется он чаще модели. Обновлены `agentType` в семи воркфлоу, ссылки в `adv-influence` и `adv-product`, карта файлов в `CLAUDE.md`.
+- Migration: **breaking** — переопределения `workerOpts` со старым `advisors:advisor-opus-xhigh` больше не резолвятся; заменить на `advisors:advisor-opus`.
 
 ## [1.0.0] — 2026-09-06 — Первый публичный выпуск: восемь советов в одном плагине / First public release: eight councils in one plugin
 

@@ -23,9 +23,9 @@ if (!outDir) { return { status: 'error', reason: 'args.outDir обязателе
 const workDir = A.workDir || `${outDir}/.tmp-write-${outputName}`
 const WORK_DIR = workDir
 
-// Воркер совета: субагент плагина (Opus, effort xhigh). Оркестратор может передать
+// Воркер совета: субагент плагина (Opus, effort high). Оркестратор может передать
 // workerOpts: { model: 'opus' } как фоллбэк, если субагент недоступен.
-const WORKER_OPTS = A.workerOpts || { agentType: 'advisors:advisor-opus-xhigh' }
+const WORKER_OPTS = A.workerOpts || { agentType: 'advisors:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
 // ── Константы ──

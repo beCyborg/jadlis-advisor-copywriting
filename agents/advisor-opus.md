@@ -1,5 +1,5 @@
 ---
-name: advisor-opus-xhigh
+name: advisor-opus
 description: Воркер советов плагина advisors для workflow council-decision-core, council-product, council-influence, council-question-harvest, sales-council, copy-writing-pipeline и sales-write-pipeline. Не вызывать вручную — промпт целиком приходит от оркестратора.
 model: opus
 effort: high
