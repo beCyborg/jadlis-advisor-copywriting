@@ -20,9 +20,9 @@ const MAX_Q = A.maxQuestionsPerAdvisor || 3
 const MAX_CLUSTERS = 12
 
 // Воркер: тот же пиннинг, что в council-ядрах. effort:'low' — вопрошатели дешёвые
-// (per-call override; если frontmatter агента победит — вопрошатели уйдут на xhigh:
+// (per-call override; если frontmatter агента победит — вопрошатели уйдут на high:
 // дороже, но не сломается; тогда передать более дешёвый workerOpts из скилла).
-const WORKER_OPTS = A.workerOpts || { agentType: 'advisors:advisor-opus-xhigh' }
+const WORKER_OPTS = A.workerOpts || { agentType: 'advisors:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
 // Ростер: [{slug, name, skillPath}] — post-preflight список из скилла
