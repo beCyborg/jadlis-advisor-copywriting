@@ -9,7 +9,7 @@ allowed-tools:
   - AskUserQuestion
   - Workflow
 model: opus
-effort: xhigh
+effort: high
 description: |
   Совет директоров по маркетинговому копирайтингу — 8 советников-книг, ДВА режима.
   VERDICT: совет оценивает и критикует готовый текст (SWOT, карта консенсуса,

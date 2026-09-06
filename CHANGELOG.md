@@ -1,5 +1,15 @@
 # Changelog — advisors
 
+## [Unreleased]
+
+### Для человека
+
+- Воркеры советов работают на effort `high` вместо `xhigh`: то же качество разбора, заметно меньше расхода лимитов.
+
+### For agents
+
+- Changed: `effort: high` вместо `xhigh` в `agents/advisor-opus-xhigh.md` и во frontmatter пяти советов (`adv-copy`, `adv-Decision`, `adv-influence`, `adv-product`, `adv-sales`); основание — ресёрч 06.09.2026 «Effort для плана и кода»: выше `high` растут токены, а не качество. Имя агента оставлено прежним — на него ссылаются 7 workflow.
+
 ## [1.0.0] — 2026-09-06 — Первый публичный выпуск: восемь советов в одном плагине / First public release: eight councils in one plugin
 
 ### Для человека
