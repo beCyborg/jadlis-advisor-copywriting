@@ -46,7 +46,7 @@ intake (Phase A), маршрутизирует в один из двух реж�
 ```
 PLUGIN_ROOT = ${CLAUDE_PLUGIN_ROOT}
 MEMORY_DIR  = ${user_config.ADVISORS_MEMORY_DIR}
-OUTPUT_DIR  = {MEMORY_DIR}/Вердикты/Тексты
+OUTPUT_DIR  = {MEMORY_DIR}/Копирайтинг
 PROFILE     = {MEMORY_DIR}/Профили/adv-copy.md
 RUN_LOG     = {MEMORY_DIR}/Журнал советов.md
 SWIPE_FILE  = {MEMORY_DIR}/Свайп-файл.md

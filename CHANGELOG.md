@@ -1,5 +1,19 @@
 # Changelog — advisors
 
+## [1.0.2] — 2026-09-07 — вердикты по подпапке на совет в корне памяти / verdicts flat, one folder per council
+
+### Для человека
+- Вердикты снова лежат прямо в папке памяти, по подпапке на совет (`Решения`, `Продукт`, `Медийность`, `Продажи`, `Копирайтинг`) — промежуточный уровень `Вердикты/` убран.
+- Совет текстов пишет в `Копирайтинг`, а не в `Тексты`.
+
+### For agents
+- Changed: `OUTPUT_DIR` в пяти скиллах — `{MEMORY_DIR}/Вердикты/<Совет>` → `{MEMORY_DIR}/<Совет>`; у `adv-copy` подпапка `Тексты` → `Копирайтинг`.
+- Changed: `scripts/init-memory.sh` — из `mkdir -p` убран `$MEM/Вердикты`.
+- Changed: `shared/memory-write-contract.md` — таблица назначений и правило создания подпапки.
+- Changed: `assets/memory-skeleton/Советы.md` — карта «Что где лежит» перечисляет пять папок советов.
+- Removed: `assets/memory-skeleton/Вердикты/README.md.tpl` — служебный README промежуточного уровня.
+- Migration: у кого вердикты уже лежат в `<memory>/Вердикты/<Совет>/`, перенести их на уровень выше (`mv "<memory>/Вердикты/"* "<memory>/"`) — скиллы туда больше не смотрят.
+
 ## [1.0.1] — 2026-09-07 — effort high и Opus на anchor-check / effort high and Opus on anchor-check
 
 ### Для человека

@@ -15,7 +15,7 @@ case "$MEM" in
   *'${user_config'*) echo "ADVISORS_MEMORY_DIR не задан" >&2; exit 2 ;;
 esac
 
-mkdir -p "$MEM" "$MEM/Вердикты" "$MEM/Профили" "$MEM/_runs"
+mkdir -p "$MEM" "$MEM/Профили" "$MEM/_runs"
 cp -Rn "$ROOT/assets/memory-skeleton/." "$MEM/" 2>/dev/null || true
 
 # Шаблоны *.tpl → рабочие имена (в репозитории они лежат под .tpl, чтобы не
