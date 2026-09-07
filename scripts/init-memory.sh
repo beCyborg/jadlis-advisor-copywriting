@@ -12,7 +12,7 @@ case "$MEM" in
 esac
 
 case "$MEM" in
-  *'${user_config'*) echo "ADVISORS_MEMORY_DIR не задан" >&2; exit 2 ;;
+  *'${user_config'*) echo "MEMORY_DIR не задан" >&2; exit 2 ;;
 esac
 
 mkdir -p "$MEM" "$MEM/Профили" "$MEM/_runs"

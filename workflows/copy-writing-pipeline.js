@@ -25,7 +25,7 @@ const WORK_DIR = workDir
 
 // Воркер совета: субагент плагина (Opus, effort high). Оркестратор может передать
 // workerOpts: { model: 'opus' } как фоллбэк, если субагент недоступен.
-const WORKER_OPTS = A.workerOpts || { agentType: 'advisors:advisor-opus' }
+const WORKER_OPTS = A.workerOpts || { agentType: 'advisor-copywriting:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
 // ── Константы ──
@@ -50,9 +50,9 @@ const ROUTING = {
 }
 
 const EXTRA_REFS = {
-  'short-form': [`${PLUGIN_ROOT}/skills/adv-copy/protocols/short-form-hook-point.md`],
+  'short-form': [`${PLUGIN_ROOT}/skills/advisor-copywriting/protocols/short-form-hook-point.md`],
   'email':      [`${PLUGIN_ROOT}/lenses/advisor-bly/references/boron-letters.md`],
-  '*':          [`${PLUGIN_ROOT}/skills/adv-copy/references/copy-patterns-classics.md`],
+  '*':          [`${PLUGIN_ROOT}/skills/advisor-copywriting/references/copy-patterns-classics.md`],
 }
 
 const LENSES = [

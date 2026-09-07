@@ -1,5 +1,5 @@
 ---
-name: adv-copy
+name: advisor-copywriting
 user-invocable: true
 argument-hint: "<текст для оценки> ИЛИ <что написать> (--verdict / --write)"
 allowed-tools:
@@ -19,7 +19,7 @@ description: |
   Breakthrough Advertising (Schwartz), The Copywriter's Handbook (Bly),
   Great Leads (Masterson/Forde), Influence (Cialdini), Made to Stick (Heath & Heath),
   Contagious (Berger). Типы текста: short-form, landing, email, VSL.
-  Invoke via /advisors:adv-copy.
+  Invoke via /advisor-copywriting.
   English triggers: write copy, landing page copy, email sequence, sales copy,
   critique my copy, write a post, write a landing, write an email, copywriting,
   headline, hook, VSL script, sales letter, rewrite this copy.
@@ -45,7 +45,7 @@ intake (Phase A), маршрутизирует в один из двух реж�
 
 ```
 PLUGIN_ROOT = ${CLAUDE_PLUGIN_ROOT}
-MEMORY_DIR  = ${user_config.ADVISORS_MEMORY_DIR}
+MEMORY_DIR  = ${user_config.MEMORY_DIR}
 OUTPUT_DIR  = {MEMORY_DIR}/Копирайтинг
 PROFILE     = {MEMORY_DIR}/Профили/adv-copy.md
 RUN_LOG     = {MEMORY_DIR}/Журнал советов.md
@@ -65,9 +65,9 @@ WORK_DIR    = {MEMORY_DIR}/_runs/copy-{QUERY_SLUG}
 ## Phase A.0 — гейт памяти (первым, каждый запуск)
 
 1. `MEMORY_DIR` пуст **или** в нём буквально видно `${user_config` → **остановиться**:
-   > Не задана папка памяти советов. Открой `/plugin` → advisors → настройки и укажи
-   > `ADVISORS_MEMORY_DIR` (например `~/advisors-memory`), либо переустанови плагин с
-   > `--config ADVISORS_MEMORY_DIR=<путь>`. Тексты в текущую рабочую папку совет не пишет.
+   > Не задана папка памяти советов. Открой `/plugin` → advisor-copywriting → настройки и укажи
+   > `MEMORY_DIR` (например `~/advisors-memory`), либо переустанови плагин с
+   > `--config MEMORY_DIR=<путь>`. Тексты в текущую рабочую папку совет не пишет.
 2. Путь начинается с `~/` → заменить `~` на `$HOME` **до любой записи**.
 3. Развернуть скелет — идемпотентно, существующие файлы не трогает; если папка создана
    впервые, сказать об этом и перечислить, что в ней появилось:
@@ -163,7 +163,7 @@ Workflow({
     quorum: <ceil(0.75 × N_built)>,
     workDir: WORK_DIR,
     pluginRoot: PLUGIN_ROOT,     // ${CLAUDE_PLUGIN_ROOT} в JS НЕ подставляется — передаём значением
-    validatorProtocol: "${CLAUDE_PLUGIN_ROOT}/skills/adv-copy/protocols/validator-protocol.md"
+    validatorProtocol: "${CLAUDE_PLUGIN_ROOT}/skills/advisor-copywriting/protocols/validator-protocol.md"
   }
 })
 ```
