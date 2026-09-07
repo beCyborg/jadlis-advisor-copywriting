@@ -25,4 +25,12 @@ find "$MEM" -type f -name '*.tpl' | while IFS= read -r f; do
   if [ -e "$t" ]; then rm -f "$f"; else mv "$f" "$t"; fi
 done
 
+# Профиль каждого совета: пустой скелет, если файла ещё нет (советы читают его в Phase A
+# и дописывают журнал сессий в Phase C; без файла первый прогон идёт с пустым контекстом).
+for prof in adv-Decision adv-product adv-influence adv-sales adv-copy adv-CognitiveBiases adv-nupp green-advisor adv-psy; do
+  f="$MEM/Профили/$prof.md"
+  [ -e "$f" ] && continue
+  printf -- '---\nupdated: %s\n---\n\n# %s — профиль\n\n## Profile\nПостоянный контекст: продукт, аудитория, стадия, ограничения, позиционирование. Ведёт человек; советы читают целиком и не переписывают.\n\n## Session log\n' "$(date +%F)" "$prof" > "$f"
+done
+
 printf '%s\n' "$MEM"
