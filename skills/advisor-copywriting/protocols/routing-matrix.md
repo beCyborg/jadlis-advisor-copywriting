@@ -23,9 +23,9 @@ const ROUTING = {
 
 ```js
 const EXTRA_REFS = {
-  'short-form': ['{PLUGIN_ROOT}/skills/adv-copy/protocols/short-form-hook-point.md'],
+  'short-form': ['{PLUGIN_ROOT}/skills/advisor-copywriting/protocols/short-form-hook-point.md'],
   'email':      ['{PLUGIN_ROOT}/lenses/advisor-bly/references/boron-letters.md'],
-  '*':          ['{PLUGIN_ROOT}/skills/adv-copy/references/copy-patterns-classics.md'],
+  '*':          ['{PLUGIN_ROOT}/skills/advisor-copywriting/references/copy-patterns-classics.md'],
 }
 ```
 

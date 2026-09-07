@@ -1,29 +1,27 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
-  "name": "advisors",
-  "version": "1.0.3",
-  "displayName": "advisors — советы директоров",
-  "description": "Восемь советов директоров на книжных линзах: параллельный разбор запроса, перекрёстная проверка claims скептиками, единый вердикт файлом. Решения, продукт, медийность, продажи, тексты, когнитивные искажения, стратегия власти, диагностика проектов.",
+  "name": "advisor-copywriting",
+  "version": "1.0.0",
+  "displayName": "Совет по копирайтингу — 8 книг",
+  "description": "Два режима: VERDICT — совет оценивает готовый текст (SWOT, карта консенсуса, переписанные фрагменты); WRITE — конвейер бриф → три драфта → критика по типу текста → синтез финала.",
   "author": {
     "name": "Be Cyborg"
   },
-  "homepage": "https://github.com/beCyborg/advisors",
-  "repository": "https://github.com/beCyborg/advisors",
+  "homepage": "https://github.com/beCyborg/jadlis-advisor-copywriting",
+  "repository": "https://github.com/beCyborg/jadlis-advisor-copywriting",
   "keywords": [
+    "jadlis",
     "council",
-    "advisors",
-    "decision-making",
-    "product",
-    "marketing",
-    "sales",
     "copywriting",
-    "cognitive-biases"
+    "landing",
+    "email",
+    "workflow"
   ],
   "userConfig": {
-    "ADVISORS_MEMORY_DIR": {
+    "MEMORY_DIR": {
       "type": "directory",
       "title": "Папка памяти советов",
-      "description": "Куда советы пишут вердикты, журналы и профили. Обычная папка с markdown-файлами; можно указать путь внутри Obsidian-vault. Содержимое приватное — выбирай место с учётом синхронизации и бэкапов.",
+      "description": "Куда совет пишет вердикты, журналы и профили. Обычная папка с markdown-файлами; все советы Jadlis могут указывать на одну и ту же папку. Содержимое приватное — выбирай место с учётом синхронизации и бэкапов.",
       "default": "~/advisors-memory",
       "required": false
     }
