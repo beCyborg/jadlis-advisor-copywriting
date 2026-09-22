@@ -5,6 +5,21 @@
 
 ## [Unreleased]
 
+## [1.0.3] — 2026-09-22 — Переход на Opus 5.5 / Switch to Opus 5.5
+
+### Для человека
+
+- Совет целиком — советники, скептики и валидатор — теперь работает на новой модели Opus 5.5 с окном контекста в 1 млн токенов.
+- Требует Claude Code ≥ 2.1.280: более старые версии могут не знать эту модель — сначала обновите Claude Code, потом совет.
+- Effort, состав линз, формат вердикта и папка памяти не менялись.
+
+### For agents
+
+- Changed: `agents/advisor-opus.md` — `model: opus` → `model: claude-opus-5-5` (`effort: high` unchanged).
+- Changed: `skills/advisor-copywriting/SKILL.md` — frontmatter `model: opus` → `model: claude-opus-5-5` (`effort: high` unchanged).
+- Changed: `workflows/copy-writing-pipeline.js`, `workflows/council-influence.js` — header comments: documented fallback `workerOpts: { model: 'claude-opus-5-5' }` (was `'opus'`); `council-influence.js` also names the worker pin Opus 5.5. Code path unchanged.
+- Migration: requires Claude Code ≥ 2.1.280 — older versions may reject the unknown model ID `claude-opus-5-5` when loading the skill or spawning `advisor-copywriting:advisor-opus`; update Claude Code (`claude update`). The 1M context window is native to the model — no `[1m]` suffix. Callers that pass their own `workerOpts` are unaffected.
+
 ## [1.0.2] — 2026-09-08
 
 ### Для человека

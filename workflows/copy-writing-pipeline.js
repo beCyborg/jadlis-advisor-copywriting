@@ -24,7 +24,7 @@ const workDir = A.workDir || `${outDir}/.tmp-write-${outputName}`
 const WORK_DIR = workDir
 
 // Воркер совета: субагент плагина (Opus, effort high). Оркестратор может передать
-// workerOpts: { model: 'opus' } как фоллбэк, если субагент недоступен.
+// workerOpts: { model: 'claude-opus-5-5' } как фоллбэк, если субагент недоступен.
 const WORKER_OPTS = A.workerOpts || { agentType: 'advisor-copywriting:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
