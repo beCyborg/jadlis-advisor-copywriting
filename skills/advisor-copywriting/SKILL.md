@@ -8,7 +8,7 @@ allowed-tools:
   - Bash
   - AskUserQuestion
   - Workflow
-model: opus
+model: claude-opus-5-5
 effort: high
 description: |
   Совет директоров по маркетинговому копирайтингу — 8 советников-книг, ДВА режима.

@@ -20,9 +20,9 @@ const WORK_DIR = A.workDir || 'adv-influence/.tmp-council-dryrun'
 const SKEPTICS = 3
 const MAX_CLAIMS = 12
 
-// Воркер: пиннинг Opus 5 + effort high через субагента advisor-opus.
+// Воркер: пиннинг Opus 5.5 + effort high через субагента advisor-opus.
 // Реестр агентов кэшируется на старте сессии — если субагент создан в текущей сессии,
-// оркестратор может передать workerOpts: { model: 'opus' } как фоллбэк.
+// оркестратор может передать workerOpts: { model: 'claude-opus-5-5' } как фоллбэк.
 const WORKER_OPTS = A.workerOpts || { agentType: 'advisor-copywriting:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 

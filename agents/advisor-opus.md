@@ -1,7 +1,7 @@
 ---
 name: advisor-opus
 description: Воркер советов плагина advisor-copywriting для workflow council-decision-core, council-product, council-influence, council-question-harvest, sales-council, copy-writing-pipeline и sales-write-pipeline. Не вызывать вручную — промпт целиком приходит от оркестратора.
-model: opus
+model: claude-opus-5-5
 effort: high
 ---
 
