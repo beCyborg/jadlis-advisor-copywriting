@@ -244,7 +244,7 @@ phase('Synthesize')
 const FINAL_FIELDS = 'reportPath (строка), finalHook (строка), altHooks (массив строк), techniques (массив строк), status (строка)'
 const synthText = synthPrompt(drafts, critiques)
 const finalDefaultPath = `${outDir}/${outputName}.md`
-const synthCall = agent(synthText, w({ label: 'synth', phase: 'Synthesize', schema: FINAL_SCHEMA }))
+const synthCall = agent(synthText, w({ label: 'synth', phase: 'Synthesize', effort: 'xhigh', schema: FINAL_SCHEMA }))
 // Файл пишется ДО structured-возврата — отказ возврата не теряет работу (файл уже на диске).
 const final = (await synthCall.catch(e => {
   log(`synth structured-return не удался (${e && e.message ? e.message : e}) — читай файл из ${finalDefaultPath}`)
@@ -254,7 +254,7 @@ const final = (await synthCall.catch(e => {
 // ═══ Phase 4 — Deliver ═══
 phase('Deliver')
 // Null-агент (упавший deliver) не роняет прогон — .catch → null.
-const delivered = await agent(deliverPrompt(), { label: 'deliver', phase: 'Deliver', schema: DELIVER_SCHEMA }).catch(() => null)
+const delivered = await agent(deliverPrompt(), { label: 'deliver', phase: 'Deliver', effort: 'low', schema: DELIVER_SCHEMA }).catch(() => null)
 
 // ── Возврат ──
 return {

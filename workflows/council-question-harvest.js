@@ -161,7 +161,7 @@ if (raw.length === 0) {
 // ═══ Phase 2 — Cluster (barrier оправдан: дедуп требует всех вопросов сразу) ═══
 phase('Cluster')
 // кластеризатор пишет harvest.json ДО structured-возврата — отказ возврата (retry cap) не должен ронять прогон
-const clustered = await agent(clusterPrompt(raw), w({ label: 'question-clusterer', phase: 'Cluster', schema: CLUSTER_SCHEMA }))
+const clustered = await agent(clusterPrompt(raw), w({ label: 'question-clusterer', phase: 'Cluster', effort: 'medium', schema: CLUSTER_SCHEMA }))
   .catch(e => {
     log(`Кластеризатор structured-return не удался (${e && e.message ? e.message : e}) — кластеры читай из harvest.json`)
     return null
