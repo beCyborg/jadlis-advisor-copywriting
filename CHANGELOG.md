@@ -5,6 +5,21 @@
 
 ## [Unreleased]
 
+## [1.0.5] — 2026-09-23 — Контракт прогона / Run contract
+
+### Для человека
+
+- В скилл добавлен короткий «контракт прогона»: в VERDICT и WRITE сказано, какой файл в папке `Копирайтинг` и какая строка журнала означают конец прогона.
+- Свайп-файл по-прежнему пополняется только по вашему подтверждению; остальные шаги совет делает сам, не спрашивая «Продолжить?».
+- Драфтеры WRITE-конвейера получают указание писать на языке брифа вместо просьбы «рассуждать» на нём.
+
+### For agents
+
+- Added: `skills/advisor-copywriting/SKILL.md` — `## Run contract` before `## Phase A.0`: per-mode Done when (VERDICT verdict / WRITE final text in `{OUTPUT_DIR}`, journal line `adv-copy · {режим}`, profile session log; low quorum, insufficient-drafts, micro-request also end the run), own confirm steps (A.0, A.1, A.3, A.4 brief interview, retry offer, swipe file), ledger check for VERDICT, citation-tag check for WRITE, `{WORK_DIR}/progress.md`, final report shape.
+- Changed: `workflows/copy-writing-pipeline.js:127` — draft prompt: the request to reason in the brief's language → «Пиши на языке брифа».
+- Migration: none.
+- Refs: Anthropic guide «Getting the most out of Opus 5.5» (adopted 2026-09-23) — no requests to show reasoning; every skill states what "done" means and when to stop.
+
 ## [1.0.4] — 2026-09-22 — Effort по ролям / Effort by role
 
 ### Для человека
