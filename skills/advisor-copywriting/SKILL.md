@@ -62,6 +62,15 @@ WORK_DIR    = {MEMORY_DIR}/_runs/copy-{QUERY_SLUG}
 `{MEMORY_DIR}`: подстановка `${CLAUDE_PLUGIN_ROOT}` и `${user_config.*}` в читаемые файлы не
 доходит. Подставляй значения сам; литеральный `{PLUGIN_ROOT}` в Read не отправляй.
 
+## Run contract
+
+- **Done when:** VERDICT — on `status: "ok"` the verdict is copied to `{OUTPUT_DIR}/{FILE_NAME}.md` (`test -s` passes), shown with the ledger, and `{WORK_DIR}` is removed; WRITE — on `status: "ok" | "written-no-meta"` `{OUTPUT_DIR}/{outputName}.md` exists (`test -s` passes) and is shown with its path; in both, one line `- YYYY-MM-DD · adv-copy · {режим} · {имя файла} — …` is appended to `{RUN_LOG}` and a session-log entry to `{PROFILE}`. Low quorum (answers shown with the warning), `insufficient-drafts`/`error` (reason shown) and a micro-request answered from one lens (A.5) also end the run, with no verdict file.
+- **Keep going vs. stop:** a step inside this skill's scope that needs no input from the user — do it, don't announce it and stop. Never end a turn on a status line, a recap naming the next step, or an offer to continue («Сделать?», «Продолжить?»). Stop only when you cannot continue without the user, or before anything risky (delete, send outward, payments, secrets).
+- This skill's own confirm steps override "keep going": the Phase A.0 stop when `MEMORY_DIR` is unset, the mode question in A.1 when the request is ambiguous, the request for the text in A.3 when it is empty, the brief interview in A.4 (plus the optional question-harvest batch), the retry offer after `insufficient-drafts`, and the swipe-file entry — only on the user's explicit confirmation. Default-accept applies only where the skill already allows it (harvest empty or failed → the pipeline runs without it).
+- **Subagent results:** in VERDICT the council's per-claim cross-verification (skeptics' ledger) is the check; before presenting, spot-check one SUPPORTED claim — its citation tag exists in that lens's `references/`. WRITE has no ledger: open the final file and check 1–2 citation tags against the cited lens's `references/`; tags you did not check are labelled «не проверено».
+- **Progress file:** a run longer than 10 steps, or one with user answers between steps (the WRITE brief interview always adds them), keeps a `- [ ]` checklist in `{WORK_DIR}/progress.md`, ticked as it goes; after a pause or context compaction, re-read it and continue from the first unticked item. It goes away with `{WORK_DIR}` and is not an advisor answer in the low-quorum listing.
+- **Final report:** result (verdict or final text + path) → «Не удалось подтвердить» (what, and where it was looked for) → **От тебя:** on its own line, only when the user must do or decide something.
+
 ## Phase A.0 — гейт памяти (первым, каждый запуск)
 
 1. `MEMORY_DIR` пуст **или** в нём буквально видно `${user_config` → **остановиться**:
