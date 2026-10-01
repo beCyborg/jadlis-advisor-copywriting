@@ -5,6 +5,22 @@
 
 ## [Unreleased]
 
+## [1.0.6] — 2026-10-02 — Проверка args до первого агента / Args guard before the first agent
+
+### Для человека
+
+- Если аргументы совета не разобрались (кавычки „“ или голая " внутри значения), пришли пустыми (повтор прогона без аргументов) или в них не хватает ключа, совет теперь сразу падает с понятной ошибкой и не запускает ни одного агента. Раньше он молча прогонял весь совет на тестовых данных.
+- Рабочая папка прогона должна быть абсолютным путём; если папка памяти задана относительным путём, скилл делает её абсолютной и говорит об этом.
+
+### For agents
+
+- Changed: every engine in `workflows/` — one guard block right after args normalisation: a string that fails `JSON.parse` throws (script name, parse error, 300-char preview, hint about „“/unescaped `\"` and that resume does not inherit args); dry-run defaults only with `args.dryRun === true`; otherwise required keys must be non-empty and `workDir` absolute, else throw before any `agent()`.
+- Changed: `workflows/copy-writing-pipeline.js` — required without `dryRun`: brief, outputName, today, advisors, outDir, workDir, pluginRoot; outDir absolute too.
+- Changed: `workflows/council-influence.js` — required without `dryRun`: query, advisors, workDir, pluginRoot.
+- Changed: `workflows/council-question-harvest.js` — required without `dryRun`: query, roster, councilType, workDir.
+- Changed: `skills/advisor-copywriting/SKILL.md` Phase A.0 step 2 — a relative `MEMORY_DIR` (after `~` expansion) is made absolute (`$(pwd)/…`) and the user is told.
+- Migration: callers that relied on silent defaults must pass the full args; a deliberate test run passes `dryRun: true`. A resumed run must pass the same args again.
+
 ## [1.0.5] — 2026-09-23 — Контракт прогона / Run contract
 
 ### Для человека

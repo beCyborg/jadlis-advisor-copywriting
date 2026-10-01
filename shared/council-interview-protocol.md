@@ -22,7 +22,8 @@ Workflow({
     roster: <post-preflight ростер совета в форме {slug, name, skillPath}>,
     councilType: "decision" | "product" | "influence",
     maxQuestionsPerAdvisor: 3,
-    workDir: WORK_DIR      // ТОТ ЖЕ, что у council-ядра: harvest.json уберёт общий rm -rf в Phase C
+    workDir: WORK_DIR,     // АБСОЛЮТНЫЙ и ТОТ ЖЕ, что у council-ядра: harvest.json уберёт общий rm -rf в Phase C
+    pluginRoot: PLUGIN_ROOT
   }
 })
 ```
