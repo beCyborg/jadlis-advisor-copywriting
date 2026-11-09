@@ -5,6 +5,18 @@
 
 ## [Unreleased]
 
+## [1.0.7] — 2026-11-09 — финальный агент из личного файла, механика на medium / final agent from a personal file, mechanical steps at medium
+
+### Для человека
+- Последний агент совета — валидатор VERDICT (`council-influence.js`) и финальный текст WRITE (`copy-writing-pipeline.js`) — может работать на модели из личного файла `~/.claude/skills/_shared/final-agent.json` (например, Fable 5.2 · high). Скилл говорит одной строкой, какую модель он получил. Нет файла — всё как раньше: Opus 5.5 · xhigh.
+- Пустой ответ или сбой на модели из файла — один повтор на Opus 5.5 · xhigh, вердикт не теряется.
+- Механические шаги (вопрошатели `council-question-harvest.js` и `deliver` в `copy-writing-pipeline.js`) работают на effort medium, а не low.
+
+### For agents
+- Added: `scripts/final-agent.py`; `finalAgent()` + `FINAL_OPTS` in the engines (valid `args.finalOpts` → per-call `model` + `effort`; null/throw → one retry on the worker default, label `<label>→opus-retry`).
+- Changed: `effort: 'low'` → `'medium'` (вопрошатели `council-question-harvest.js` и `deliver` в `copy-writing-pipeline.js`); skill passes `finalOpts: FINAL_OPTS` in the Workflow args; `model:`/`effort:` removed from the skill frontmatter.
+- Source: `jadlis-advisors-source` advisors 1.0.8. Tests: `tools/test-final-opts.mjs`.
+
 ## [1.0.6] — 2026-10-02 — Проверка args до первого агента / Args guard before the first agent
 
 ### Для человека

@@ -8,8 +8,6 @@ allowed-tools:
   - Bash
   - AskUserQuestion
   - Workflow
-model: claude-opus-5-5
-effort: high
 description: |
   Совет директоров по маркетинговому копирайтингу — 8 советников-книг, ДВА режима.
   VERDICT: совет оценивает и критикует готовый текст (SWOT, карта консенсуса,
@@ -163,6 +161,14 @@ awarenessStage (1–5), sophistication (1–5), cta, constraints, swipeFile, con
 данными в плагине и не требуют совета. WRITE-конвейер = 3 драфта + критика, дороже
 стандартного VERDICT — не запускать ради одной фразы.
 
+**Финальный агент (личный файл).** Перед запуском движка выполни
+`python3 "${CLAUDE_PLUGIN_ROOT}/scripts/final-agent.py"` и возьми поле `finalOpts` как `FINAL_OPTS`
+(`{model, effort}` или `null`). Файл `~/.claude/skills/_shared/final-agent.json` необязательный и личный;
+`null` → финальный агент движка на умолчании (Opus 5.5 · xhigh). Скажи одной строкой: «Финальный агент:
+claude-fable-5-2 · high (final-agent.json)» или «Финальный агент: по умолчанию, Opus 5.5 · xhigh
+(final-agent.json: <reason>)». `FINAL_OPTS` уходит в args каждого движка ниже, кроме
+`council-question-harvest.js`; пустой ответ на нём — один повтор на умолчании внутри движка.
+
 ## VERDICT-режим
 
 ```
@@ -175,7 +181,8 @@ Workflow({
     quorum: <ceil(0.75 × N_built)>,
     workDir: WORK_DIR,
     pluginRoot: PLUGIN_ROOT,     // ${CLAUDE_PLUGIN_ROOT} в JS НЕ подставляется — передаём значением
-    validatorProtocol: "${CLAUDE_PLUGIN_ROOT}/skills/advisor-copywriting/protocols/validator-protocol.md"
+    validatorProtocol: "${CLAUDE_PLUGIN_ROOT}/skills/advisor-copywriting/protocols/validator-protocol.md",
+    finalOpts: FINAL_OPTS        // из final-agent.py или null — не выдумывай
   }
 })
 ```
@@ -204,7 +211,8 @@ Workflow({
     advisors: <фактически существующие из ростера — формат {slug,prefix,book,author,skillPath}>,
     outDir: OUTPUT_DIR,
     workDir: WORK_DIR,
-    pluginRoot: PLUGIN_ROOT          // ${CLAUDE_PLUGIN_ROOT} в JS НЕ подставляется — передаём значением
+    pluginRoot: PLUGIN_ROOT,         // ${CLAUDE_PLUGIN_ROOT} в JS НЕ подставляется — передаём значением
+    finalOpts: FINAL_OPTS            // из final-agent.py или null — не выдумывай
   }
 })
 ```

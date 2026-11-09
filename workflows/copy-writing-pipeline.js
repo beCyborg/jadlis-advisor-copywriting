@@ -62,6 +62,23 @@ const WORK_DIR = workDir
 const WORKER_OPTS = A.workerOpts || { agentType: 'advisor-copywriting:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
+// Final agent (2026-11-09): args.finalOpts {model, effort} — the skill reads them from the PERSONAL file
+// ~/.claude/skills/_shared/final-agent.json (scripts/final-agent.py). Without it the final agent keeps the
+// default: the worker (Opus 5.5) at effort xhigh. On finalOpts an empty answer or a throw → ONE retry on the
+// default, so a classifier stop or an unavailable model on the override never costs the verdict.
+const FINAL_OPTS = (A.finalOpts && typeof A.finalOpts === 'object' && /^claude-[a-z0-9-]+$/.test(String(A.finalOpts.model || '')) &&
+  ['low', 'medium', 'high', 'xhigh', 'max'].includes(A.finalOpts.effort)) ? { model: A.finalOpts.model, effort: A.finalOpts.effort } : null
+async function finalAgent(prompt, extra) {
+  if (!FINAL_OPTS) return agent(prompt, w(extra))
+  const first = await agent(prompt, w(Object.assign({}, extra, FINAL_OPTS))).catch(e => {
+    log(`${extra.label} (${FINAL_OPTS.model}) упал: ${String((e && e.message) || e).slice(0, 200)}`)
+    return null
+  })
+  if (first) return first
+  log(`${extra.label} на ${FINAL_OPTS.model} не ответил — один повтор на умолчании (Opus 5.5 · ${extra.effort}).`)
+  return agent(prompt, w(Object.assign({}, extra, { label: `${extra.label}→opus-retry` })))
+}
+
 // ── Константы ──
 const ROSTER = [
   { slug: 'sugarman',      prefix: 'ADW',  book: 'The Adweek Copywriting Handbook', author: 'Sugarman',    skillPath: `${PLUGIN_ROOT}/lenses/advisor-sugarman` },
@@ -278,7 +295,7 @@ phase('Synthesize')
 const FINAL_FIELDS = 'reportPath (строка), finalHook (строка), altHooks (массив строк), techniques (массив строк), status (строка)'
 const synthText = synthPrompt(drafts, critiques)
 const finalDefaultPath = `${outDir}/${outputName}.md`
-const synthCall = agent(synthText, w({ label: 'synth', phase: 'Synthesize', effort: 'xhigh', schema: FINAL_SCHEMA }))
+const synthCall = finalAgent(synthText, { label: 'synth', phase: 'Synthesize', effort: 'xhigh', schema: FINAL_SCHEMA })
 // Файл пишется ДО structured-возврата — отказ возврата не теряет работу (файл уже на диске).
 const final = (await synthCall.catch(e => {
   log(`synth structured-return не удался (${e && e.message ? e.message : e}) — читай файл из ${finalDefaultPath}`)
@@ -288,7 +305,7 @@ const final = (await synthCall.catch(e => {
 // ═══ Phase 4 — Deliver ═══
 phase('Deliver')
 // Null-агент (упавший deliver) не роняет прогон — .catch → null.
-const delivered = await agent(deliverPrompt(), { label: 'deliver', phase: 'Deliver', effort: 'low', schema: DELIVER_SCHEMA }).catch(() => null)
+const delivered = await agent(deliverPrompt(), { label: 'deliver', phase: 'Deliver', effort: 'medium', schema: DELIVER_SCHEMA }).catch(() => null)
 
 // ── Возврат ──
 return {

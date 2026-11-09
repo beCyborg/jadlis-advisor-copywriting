@@ -2,7 +2,7 @@ export const meta = {
   name: 'council-question-harvest',
   description: 'Интервью-фаза советов (общая для adv-Decision/product/influence): советники задают уточняющие вопросы → кластеризатор дедуплицирует для AskUserQuestion в главной сессии',
   phases: [
-    { title: 'Question fan-out', detail: 'каждый советник (effort low) читает только свой SKILL.md и возвращает до 3 вопросов, ответов на которые нет в query/userContext' },
+    { title: 'Question fan-out', detail: 'каждый советник (effort medium) читает только свой SKILL.md и возвращает до 3 вопросов, ответов на которые нет в query/userContext' },
     { title: 'Cluster', detail: 'один агент сводит сырые вопросы в ≤12 дедуплицированных кластеров с unlockValue и вариантами ответа' },
   ],
 }
@@ -53,9 +53,9 @@ const WORK_DIR = A.workDir || 'council-harvest/.tmp-dryrun'
 const MAX_Q = A.maxQuestionsPerAdvisor || 3
 const MAX_CLUSTERS = 12
 
-// Воркер: тот же пиннинг, что в council-ядрах. effort:'low' — вопрошатели дешёвые
-// (per-call override; если frontmatter агента победит — вопрошатели уйдут на high:
-// дороже, но не сломается; тогда передать более дешёвый workerOpts из скилла).
+// Воркер: тот же пиннинг, что в council-ядрах. Вопрошатели — на effort medium: правило владельца
+// с 09.11.2026 — ни один шаг конвейера не ниже medium (до того здесь стоял low ради цены).
+// Per-call override; если frontmatter агента победит — вопрошатели уйдут на high: дороже, но не сломается.
 const WORKER_OPTS = A.workerOpts || { agentType: 'advisor-copywriting:advisor-opus' }
 const w = extra => Object.assign({}, WORKER_OPTS, extra)
 
@@ -174,7 +174,7 @@ phase('Question fan-out')
 log(`Интервью-харвест (${COUNCIL_TYPE}): ${ROSTER.length} советников, до ${MAX_Q} вопросов каждый...`)
 
 const asked = (await parallel(ROSTER.map(a => () =>
-  agent(askPrompt(a), w({ label: `ask:${a.slug}`, phase: 'Question fan-out', effort: 'low', schema: ASK_SCHEMA }))
+  agent(askPrompt(a), w({ label: `ask:${a.slug}`, phase: 'Question fan-out', effort: 'medium', schema: ASK_SCHEMA }))
 ))).filter(Boolean)
 
 // Плоский список вопросов с привязкой к советнику; сломанные/пустые ответы отсекаются
